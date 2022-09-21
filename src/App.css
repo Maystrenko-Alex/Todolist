@@ -6,3 +6,6 @@
 .wrapper {
   margin: 20px;
 }
+.wrapper>h3 {
+  padding-left: 25px;
+}
