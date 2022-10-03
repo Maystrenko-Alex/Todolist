@@ -6,6 +6,31 @@
 .wrapper {
   margin: 20px;
 }
-.wrapper>h3 {
+.wrapper h3 {
   padding-left: 25px;
+}
+.isDone {
+  text-decoration: line-through;
+}
+
+.activeBtn {
+  color: white;
+  background-color: rgb(45, 142, 239);
+  font-weight: 500;
+}
+
+.btnBlock {
+  display: flex;
+  justify-content: space-around;
+}
+.error {
+  border: 1px solid red;
+  outline: none;
+}
+.notError {
+  outline: none;
+}
+.errorMessage{
+  color: red;
+  padding: 3px 10px ;
 }

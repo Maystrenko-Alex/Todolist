@@ -21,7 +21,7 @@ export function App() {
     { id: v1(), title: 'Redux', isDone: false },
     { id: v1(), title: 'RTK', isDone: false }
   ])
-  
+
   const [filter, setFilter] = useState<FilterValuesType>('all');
 
   let taskForTodoList = tasks;
@@ -36,8 +36,8 @@ export function App() {
     setTasks(tasks.filter(t => t.id !== taskID))
   }
 
-  const updateTask = (taskID: string) => {
-    setTasks(tasks.map(t => (t.id === taskID) ? { ...t, isDone: !t.isDone } : t))
+  const changeTaskStatus = (taskID: string, newStatus: boolean) => {
+    setTasks(tasks.map(t => (t.id === taskID) ? { ...t, isDone: newStatus } : t))
   }
 
   const changeFilter = (filter: FilterValuesType) => {
@@ -45,17 +45,18 @@ export function App() {
   }
 
   const addTask = (title: string) => {
-    setTasks([...tasks, {id: v1(), title, isDone: false}])
+    setTasks([...tasks, { id: v1(), title, isDone: false }])
   }
 
   return (
     <div className="App">
       <TodoList
+        filter={filter}
         title={todoListTitle}
         tasks={taskForTodoList}
         addTask={addTask}
         removeTask={removeTask}
-        updateTask={updateTask}
+        changeTaskStatus={changeTaskStatus}
         changeFilter={changeFilter}
       />
     </div>
