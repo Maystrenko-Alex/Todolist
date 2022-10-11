@@ -3,13 +3,15 @@ import { FilterValuesType, TaskType } from "./App"
 
 
 type TodoListPropsType = {
+  id: string
   title: string
   tasks: TaskType[]
   filter: FilterValuesType
-  addTask: (title: string) => void
-  removeTask: (taskID: string) => void
-  changeTaskStatus: (taskID: string, newStatus: boolean) => void
-  changeFilter: (filter: FilterValuesType) => void
+  addTask: (title: string, todoListId: string) => void
+  removeTask: (taskID: string, todoListId: string) => void
+  removeTodoList: (todoListId: string) => void
+  changeTaskStatus: (taskID: string, todoListId: string, newStatus: boolean) => void
+  changeTodoListFilter: (filter: FilterValuesType, todoListId: string) => void
 }
 
 export const TodoList = (props: TodoListPropsType) => {
@@ -19,7 +21,7 @@ export const TodoList = (props: TodoListPropsType) => {
 
   const tasksList = props.tasks.map(task => {
     const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      props.changeTaskStatus(task.id, e.currentTarget.checked)
+      props.changeTaskStatus(task.id, props.id, e.currentTarget.checked)
     }
     return (
       <li key={task.id}>
@@ -28,14 +30,15 @@ export const TodoList = (props: TodoListPropsType) => {
           checked={task.isDone}
           onChange={changeTaskStatusHandler} />
         <span className={task.isDone ? 'isDone' : ''}>{task.title}</span>
-        <button onClick={() => props.removeTask(task.id)}>x</button>
+        <button onClick={() => props.removeTask(task.id, props.id)}>x</button>
       </li>
     )
   })
-  const handlerCreator = (filter: FilterValuesType) => () => props.changeFilter(filter);
+  const handlerCreator = (filter: FilterValuesType) => () => props.changeTodoListFilter(filter, props.id);
+  const removeTodoList = () => props.removeTodoList(props.id)
   const addNewTaskHandler = () => {
     if (title.trim()) {
-      props.addTask(title.trim());
+      props.addTask(title.trim(), props.id);
     } else {
       setError(true);
     }
@@ -48,7 +51,10 @@ export const TodoList = (props: TodoListPropsType) => {
   const onKeyPressAddTask = (e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && addNewTaskHandler();
   return (
     <div className='wrapper'>
-      <h3>{props.title}</h3>
+      <h3>
+        {props.title}
+        <button onClick={removeTodoList}>x</button>
+      </h3>
       <div>
         <input
           className={error ? 'error' : 'notError'}
@@ -56,7 +62,6 @@ export const TodoList = (props: TodoListPropsType) => {
           onChange={onChangeValueInputHandler}
           onKeyPress={onKeyPressAddTask}
         />
-
         <button onClick={addNewTaskHandler}>+</button>
         {error && <div className={'errorMessage'}>Title is required!</div>}
       </div>
