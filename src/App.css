@@ -1,8 +1,10 @@
 .App {
   padding: 10px;
+  /* display: flex; */
+}
+.todoWrapper {
   display: flex;
 }
-
 .wrapper {
   margin: 20px;
 }
