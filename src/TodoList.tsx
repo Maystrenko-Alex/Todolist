@@ -1,3 +1,5 @@
+import { Button, Divider, Stack} from "@mui/material"
+import DeleteIcon from '@mui/icons-material/Delete';
 import { ChangeEvent } from "react"
 import AddItemForm from "./AddItemForm"
 import { FilterValuesType, TaskType } from "./App"
@@ -26,8 +28,9 @@ export const TodoList = (props: TodoListPropsType) => {
     }
     const changeTaskTitle = (newTitle: string) => props.changeTaskTitle(newTitle, task.id, props.id);
     return (
-      <li key={task.id}>
+      <li key={task.id} className={task.isDone ? 'isDone' : ''}>
         <input
+
           type="checkbox"
           checked={task.isDone}
           onChange={changeTaskStatusHandler} />
@@ -55,9 +58,24 @@ export const TodoList = (props: TodoListPropsType) => {
         {props.tasks.length ? tasksList : <span>Your taskslist is empty...</span>}
       </ul>
       <div className={'btnBlock'}>
-        <button className={(props.filter === 'all') ? 'activeBtn' : ''} onClick={handlerCreator('all')}>All</button>
-        <button className={props.filter === 'active' ? 'activeBtn' : ''} onClick={handlerCreator('active')}>Active</button>
-        <button className={props.filter === 'completed' ? 'activeBtn' : ''} onClick={handlerCreator('completed')}>Completed</button>
+      <Stack spacing={0.5} direction="row" divider={<Divider  orientation="vertical"/>}>
+        <Button
+          size='small'
+          variant = { (props.filter === 'all') ? 'outlined' : 'contained'}
+          onClick={handlerCreator('all')}
+        >All</Button>
+        <Button
+          size='small'
+          variant={ (props.filter === 'active') ? 'outlined' : 'contained'}
+          onClick={handlerCreator('active')}
+        >Active</Button>
+        <Button
+          size='small'
+          variant={ (props.filter === 'completed') ? 'outlined' : 'contained'}
+          onClick={handlerCreator('completed')}
+        >Completed</Button>
+        <Button variant="outlined" startIcon={<DeleteIcon />} > Delete</Button>
+        </Stack>
       </div>
     </div>
   );
