@@ -1,3 +1,5 @@
+import { AppBar, Button, Container, Divider, Grid, IconButton, Paper, Toolbar, Typography } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import React, { useState } from 'react';
 import { v1 } from 'uuid';
 import AddItemForm from './AddItemForm';
@@ -67,9 +69,9 @@ export function App() {
   }
 
   const addTodolist = (title: string) => {
-    const newTodoListId = v1();
+    if (todoLists.length < 6) {const newTodoListId = v1();
     setTodoLists([{ id: newTodoListId, title, filter: 'all' }, ...todoLists]);
-    setTasks({ ...tasks, [newTodoListId]: [] })
+    setTasks({ ...tasks, [newTodoListId]: [] })}
   }
 
   const changeTodoListTitle = (title: string, todoListId: string) => {
@@ -95,28 +97,54 @@ export function App() {
       filteredTasks = tasks[tl.id].filter(t => t.isDone === true)
     }
     return (
-      <TodoList
-        key={tl.id}
-        id={tl.id}
-        filter={tl.filter}
-        title={tl.title}
-        tasks={filteredTasks}
-        addTask={addTask}
-        removeTask={removeTask}
-        removeTodoList={removeTodoList}
-        changeTaskTitle={changeTaskTitle}
-        changeTaskStatus={changeTaskStatus}
-        changeTodoListTitle={changeTodoListTitle}
-        changeTodoListFilter={changeTodoListFilter}
-      />
+      <Grid item  key={tl.id}>
+        <Paper elevation={6} style={{marginRight: '5px', padding: '5px'}} >
+          <TodoList
+        
+            id={tl.id}
+            filter={tl.filter}
+            title={tl.title}
+            tasks={filteredTasks}
+            addTask={addTask}
+            removeTask={removeTask}
+            removeTodoList={removeTodoList}
+            changeTaskTitle={changeTaskTitle}
+            changeTaskStatus={changeTaskStatus}
+            changeTodoListTitle={changeTodoListTitle}
+            changeTodoListFilter={changeTodoListFilter}
+          />
+          {/* <Divider  /> */}
+        </Paper>
+      </Grid>
     )
   })
   return (
     <div className="App">
-      <AddItemForm addItem={addTodolist} />
-      <div className='todoWrapper'>
-        {todolistRender}
-      </div>
+       <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            TodoLists
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+      
+        <AddItemForm addItem={addTodolist} />
+        {/* <div className='todoWrapper'> */}
+          <Grid container xs={12} spacing={6} style={{display: 'flex', justifyContent: 'center'}}>
+            {todolistRender}
+          </Grid>
+        {/* </div> */}
+      
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { PostAdd } from '@mui/icons-material';
+import { Button, TextField } from '@mui/material';
 import React, { KeyboardEvent, ChangeEvent, useState } from 'react';
 
 type AddItemFormPropsType = {
@@ -27,16 +29,25 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
   }
 
   return (
-    <div>
-      <input
-        className={error ? 'error' : 'notError'}
-        autoFocus
-        value={title}
-        onChange={onChangeValueInputHandler}
-        onKeyPress={onKeyPressAddItem}
-      />
-      <button onClick={addNewItemHandler}>+</button>
-      {error && <div className={'errorMessage'}>Title is required!</div>}
+    <div className='addFormWrapper'>
+      <div className='inputAndButtonBlock'>
+        <TextField 
+          size='small'
+          className={error ? 'error' : 'notError'}
+          autoFocus
+          placeholder='Title'
+          value={title}
+          onChange={onChangeValueInputHandler}
+          onKeyPress={onKeyPressAddItem}
+        />
+        <Button
+          style={{paddingRight: '0px', justifyContent: 'flex-end'}}
+          onClick={addNewItemHandler}
+        >
+          <PostAdd fontSize='large' />
+        </Button>
+      </div>
+      {error && <div  className={'errorMessage'}>Title is required!</div>}
     </div>
   );
 };

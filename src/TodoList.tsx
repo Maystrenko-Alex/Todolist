@@ -1,5 +1,5 @@
-import { Button, Divider, Stack} from "@mui/material"
-import DeleteIcon from '@mui/icons-material/Delete';
+import { HighlightOff } from "@mui/icons-material"
+import { Button, Checkbox, Divider, IconButton, List, ListItem, Stack, Typography } from "@mui/material"
 import { ChangeEvent } from "react"
 import AddItemForm from "./AddItemForm"
 import { FilterValuesType, TaskType } from "./App"
@@ -28,15 +28,20 @@ export const TodoList = (props: TodoListPropsType) => {
     }
     const changeTaskTitle = (newTitle: string) => props.changeTaskTitle(newTitle, task.id, props.id);
     return (
-      <li key={task.id} className={task.isDone ? 'isDone' : ''}>
-        <input
-
-          type="checkbox"
-          checked={task.isDone}
-          onChange={changeTaskStatusHandler} />
+      <ListItem key={task.id}
+        style={{
+          padding: '0px',
+          justifyContent: 'space-between',
+          textDecoration: task.isDone ? 'line-through' : 'none'
+        }}
+        className={task.isDone ? 'isDone' : ''}
+      >
+        <Checkbox  checked={task.isDone} onChange={changeTaskStatusHandler}/>        
         <EditableSpan title={task.title} changeTitle={changeTaskTitle} />
-        <button onClick={() => props.removeTask(task.id, props.id)}>x</button>
-      </li>
+        <IconButton size={'small'} onClick={() => props.removeTask(task.id, props.id)} >
+          <HighlightOff />
+        </IconButton>
+      </ListItem>
     )
   })
   const handlerCreator = (filter: FilterValuesType) => () => props.changeTodoListFilter(filter, props.id);
@@ -48,33 +53,31 @@ export const TodoList = (props: TodoListPropsType) => {
   }
   return (
     <div className='wrapper'>
-      <h3>
+      <Typography variant={"h5"} align={"center"} >
         <EditableSpan title={props.title} changeTitle={changeTodoListTitle} />
-        <button onClick={removeTodoList}>x</button>
-      </h3>
+        <Button onClick={removeTodoList}><HighlightOff color="error"/></Button>
+      </Typography>
       <AddItemForm addItem={addTask} />
-
-      <ul>
+      <List>
         {props.tasks.length ? tasksList : <span>Your taskslist is empty...</span>}
-      </ul>
+      </List>
       <div className={'btnBlock'}>
-      <Stack spacing={0.5} direction="row" divider={<Divider  orientation="vertical"/>}>
-        <Button
-          size='small'
-          variant = { (props.filter === 'all') ? 'outlined' : 'contained'}
-          onClick={handlerCreator('all')}
-        >All</Button>
-        <Button
-          size='small'
-          variant={ (props.filter === 'active') ? 'outlined' : 'contained'}
-          onClick={handlerCreator('active')}
-        >Active</Button>
-        <Button
-          size='small'
-          variant={ (props.filter === 'completed') ? 'outlined' : 'contained'}
-          onClick={handlerCreator('completed')}
-        >Completed</Button>
-        <Button variant="outlined" startIcon={<DeleteIcon />} > Delete</Button>
+        <Stack spacing={1} direction="row" divider={<Divider orientation="vertical" />}>
+          <Button
+            size='small'
+            variant={(props.filter === 'all') ? 'outlined' : 'contained'}
+            onClick={handlerCreator('all')}
+          >All</Button>
+          <Button
+            size={'small'}
+            variant={(props.filter === 'active') ? 'outlined' : 'contained'}
+            onClick={handlerCreator('active')}
+          >Active</Button>
+          <Button
+            size='small'
+            variant={(props.filter === 'completed') ? 'outlined' : 'contained'}
+            onClick={handlerCreator('completed')}
+          >Completed</Button>
         </Stack>
       </div>
     </div>

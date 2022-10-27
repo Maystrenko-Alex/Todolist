@@ -4,12 +4,14 @@
 }
 .todoWrapper {
   display: flex;
+  flex-wrap: nowrap;
 }
 .wrapper {
-  margin: 20px;
+  margin: 30px;
 }
-.wrapper h3 {
-  padding-left: 15px;
+.wrapper h5 {
+  padding-bottom: 15px;
+  font-weight: 600;
 }
 .isDone {
   text-decoration: line-through;
@@ -20,13 +22,13 @@
   background-color: rgb(45, 142, 239);
   font-weight: 500;
 }
+.colorBtn{
+  color: green;
+}
 
 .btnBlock {
   display: flex;
-  justify-content: space-around;
-}
-.btnBlock button {
-  /* margin: 2px; */
+  justify-content: space-evenly;
 }
 .error {
   border: 1px solid red;
@@ -38,4 +40,17 @@
 .errorMessage{
   color: red;
   padding: 3px 10px ;
+}
+.notErrorMessage {
+  color: white;
+}
+.errorBlock {
+  float: right;
+}
+.addFormWrapper{
+ height: 75px;
+}
+.inputAndButtonBlock {
+  display: flex;
+  align-items: center;
 }
