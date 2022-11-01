@@ -14,7 +14,7 @@ export type TaskType = {
 
 export type FilterValuesType = 'all' | 'active' | 'completed';
 
-type TodoListType = {
+export type TodoListType = {
   id: string
   title: string
   filter: FilterValuesType
@@ -69,9 +69,11 @@ export function App() {
   }
 
   const addTodolist = (title: string) => {
-    if (todoLists.length < 6) {const newTodoListId = v1();
-    setTodoLists([{ id: newTodoListId, title, filter: 'all' }, ...todoLists]);
-    setTasks({ ...tasks, [newTodoListId]: [] })}
+    if (todoLists.length < 6) {
+      const newTodoListId = v1();
+      setTodoLists([{ id: newTodoListId, title, filter: 'all' }, ...todoLists]);
+      setTasks({ ...tasks, [newTodoListId]: [] })
+    }
   }
 
   const changeTodoListTitle = (title: string, todoListId: string) => {
@@ -97,10 +99,10 @@ export function App() {
       filteredTasks = tasks[tl.id].filter(t => t.isDone === true)
     }
     return (
-      <Grid item  key={tl.id}>
-        <Paper elevation={6} style={{marginRight: '5px', padding: '5px'}} >
+      <Grid item key={tl.id}>
+        <Paper elevation={6} style={{ marginRight: '5px', padding: '5px' }} >
           <TodoList
-        
+
             id={tl.id}
             filter={tl.filter}
             title={tl.title}
@@ -120,7 +122,7 @@ export function App() {
   })
   return (
     <div className="App">
-       <AppBar position="static">
+      <AppBar position="static">
         <Toolbar>
           <IconButton
             size="large"
@@ -137,14 +139,14 @@ export function App() {
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
-      
-        <AddItemForm addItem={addTodolist} />
-        {/* <div className='todoWrapper'> */}
-          <Grid container xs={12} spacing={6} style={{display: 'flex', justifyContent: 'center'}}>
-            {todolistRender}
-          </Grid>
-        {/* </div> */}
-      
+
+      <AddItemForm addItem={addTodolist} />
+      {/* <div className='todoWrapper'> */}
+      <Grid container xs={12} spacing={6} style={{ display: 'flex', justifyContent: 'center' }}>
+        {todolistRender}
+      </Grid>
+      {/* </div> */}
+
     </div>
   );
 }
