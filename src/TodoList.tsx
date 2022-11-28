@@ -2,8 +2,9 @@ import { HighlightOff } from "@mui/icons-material"
 import { Button, Checkbox, Divider, IconButton, List, ListItem, Stack, Typography } from "@mui/material"
 import { ChangeEvent } from "react"
 import AddItemForm from "./AddItemForm"
-import { FilterValuesType, TaskType } from "./App"
 import { EditableSpan } from "./EditableSpan"
+import { TaskType} from "./store/task-reducer"
+import { FilterValuesType } from "./store/todolists-reducer"
 
 
 type TodoListPropsType = {

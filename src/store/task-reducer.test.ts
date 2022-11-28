@@ -1,7 +1,6 @@
 import React from 'react';
 import { v1 } from 'uuid';
-import { TasksStateType } from '../App';
-import { addTaskAC, removeTaskAC, REMOVE_TASK, taskReducer, changeTaskTitleAC, changeTaskStatusAC } from './task-reducer';
+import { addTaskAC, removeTaskAC, REMOVE_TASK, taskReducer, changeTaskTitleAC, changeTaskStatusAC, TasksStateType } from './task-reducer';
 import { addTodoListAC, removeTodoListAC } from './todolists-reducer';
 let todoListId_1: string;
 let todoListId_2: string;

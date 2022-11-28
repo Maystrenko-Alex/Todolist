@@ -1,6 +1,5 @@
 import { v1 } from 'uuid';
-import { TasksStateType } from '../App';
-import { AddTodoListAT, ADD_TODOLIST, REMOVE_TODOLIST, RemoveTodoListAT } from './todolists-reducer';
+import { AddTodoListAT, ADD_TODOLIST, REMOVE_TODOLIST, RemoveTodoListAT, todoListID_1, todoListID_2 } from './todolists-reducer';
 
 export const REMOVE_TASK = 'REMOVE-TASK';
 export const ADD_TASK = 'ADD-TASK';
@@ -29,45 +28,55 @@ type ChangeTaskStatusAT = {
   newStatus: boolean
 }
 export type TaskActionType = RemoveTaskAT | AddTaskAT | ChangeTaskTitleAT | ChangeTaskStatusAT | AddTodoListAT | RemoveTodoListAT;
-// export const todoListId_1 = v1();
-// export const todoListId_2 = v1();
-// let initialState: TasksStateType = {
-//   [todoListId_1]: [
-//     { id: v1(), title: 'HTML&CSS', isDone: true },
-//     { id: v1(), title: 'JS', isDone: true },
-//     { id: v1(), title: 'React', isDone: false },
-//     { id: v1(), title: 'Redux', isDone: false },
-//     { id: v1(), title: 'RTK', isDone: false }
-//   ],
-//   [todoListId_2]: [
-//     { id: v1(), title: 'Water', isDone: true },
-//     { id: v1(), title: 'Beer', isDone: true },
-//     { id: v1(), title: 'Milk', isDone: false },
-//     { id: v1(), title: 'Sausage', isDone: false },
-//     { id: v1(), title: 'Buckwheat', isDone: false }
-//   ]
-// }
-export const taskReducer = (tasks: TasksStateType, action: TaskActionType): TasksStateType => {
+
+export type TaskType = {
+  id: string
+  title: string
+  isDone: boolean
+}
+
+export type TasksStateType = {
+  [todoListId: string]: TaskType[]
+}
+
+
+const initialState: TasksStateType = {
+  [todoListID_1]: [
+    { id: v1(), title: 'HTML&CSS', isDone: true },
+    { id: v1(), title: 'JS', isDone: true },
+    { id: v1(), title: 'React', isDone: false },
+    { id: v1(), title: 'Redux', isDone: false },
+    { id: v1(), title: 'RTK', isDone: false }
+  ],
+  [todoListID_2]: [
+    { id: v1(), title: 'Water', isDone: true },
+    { id: v1(), title: 'Beer', isDone: true },
+    { id: v1(), title: 'Milk', isDone: false },
+    { id: v1(), title: 'Sausage', isDone: false },
+    { id: v1(), title: 'Buckwheat', isDone: false }
+  ]
+}
+export const taskReducer = (state: TasksStateType = initialState, action: TaskActionType): TasksStateType => {
   switch (action.type) {
     case REMOVE_TASK:
-      return { ...tasks, [action.todoListID]: tasks[action.todoListID].filter(t => t.id !== action.taskID) };
+      return { ...state, [action.todoListID]: state[action.todoListID].filter(t => t.id !== action.taskID) };
     case ADD_TASK:
-      return {...tasks, [action.todoListID]: [{ id: v1(), title: action.taskTitle, isDone: false }, ...tasks[action.todoListID]] }
+      return {...state, [action.todoListID]: [{ id: v1(), title: action.taskTitle, isDone: false }, ...state[action.todoListID]] }
        case CHANGE_TASK_TITLE:
-      return {...tasks, [action.todoListID]: tasks[action.todoListID].map(t => t.id === action.taskID ? {...t, title: action.newTitle} : t)}
+      return {...state, [action.todoListID]: state[action.todoListID].map(t => t.id === action.taskID ? {...t, title: action.newTitle} : t)}
     case CHANGE_TASK_STATUS:
-      return {...tasks, [action.todoListID]: tasks[action.todoListID].map(t => t.id === action.taskID 
+      return {...state, [action.todoListID]: state[action.todoListID].map(t => t.id === action.taskID 
         ? {...t, isDone: action.newStatus} 
         : t) 
       };
     case ADD_TODOLIST:
-      return {[action.todoListID] : [], ...tasks};
+      return {[action.todoListID] : [], ...state};
     case REMOVE_TODOLIST:
-      let copyState = {...tasks}
+      let copyState = {...state}
       delete(copyState[action.todoListID])
       return {...copyState }
     default:
-      throw new Error("I don't undestand this type")
+      return state;
   }
 }
 
