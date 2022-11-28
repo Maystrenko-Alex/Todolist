@@ -42,7 +42,6 @@ export const todolistsReducer = (state: TodoListType[] = initialState, action: T
     case REMOVE_TODOLIST:
       return state.filter(tl => tl.id !== action.todoListID);
     case ADD_TODOLIST:
-      // return [{ id: action.todoListID, title: action.title, filter: 'all' }, ...state]
       if (state.length < 5) {
         return [{ id: action.todoListID, title: action.title, filter: 'all' }, ...state];
       } else {
