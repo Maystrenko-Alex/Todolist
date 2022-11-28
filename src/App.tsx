@@ -1,6 +1,6 @@
-import { AppBar, Button, Container, Divider, Grid, IconButton, Paper, Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, Grid, IconButton, Paper, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { v1 } from 'uuid';
 import AddItemForm from './AddItemForm';
 import './App.css';

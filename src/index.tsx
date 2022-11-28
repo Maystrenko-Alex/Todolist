@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { green, teal, yellow } from '@mui/material/colors';
-import { dark } from '@mui/material/styles/createPalette';
+import { yellow } from '@mui/material/colors';
+import { AppWithUseReducer } from './AppWithUseReducer';
 
 const newTheme = createTheme({
   palette: {
@@ -22,7 +21,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
 <ThemeProvider theme={newTheme}>
-<App />
+<AppWithUseReducer />
 </ThemeProvider>
 );
 

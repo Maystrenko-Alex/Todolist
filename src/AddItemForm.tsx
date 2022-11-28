@@ -1,9 +1,10 @@
 import { PostAdd } from '@mui/icons-material';
 import { Button, TextField } from '@mui/material';
 import React, { KeyboardEvent, ChangeEvent, useState } from 'react';
+import { v1 } from 'uuid';
 
 type AddItemFormPropsType = {
-  addItem: (title: string) => void
+  addItem: (title: string, todoListID: string) => void
 }
 
 export const AddItemForm = (props: AddItemFormPropsType) => {
@@ -20,7 +21,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
 
   const addNewItemHandler = () => {
     if (title.trim()) {
-      props.addItem(title.trim());
+      props.addItem(title.trim(), v1());
     } else {
       setError(true);
     }

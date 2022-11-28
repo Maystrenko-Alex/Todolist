@@ -15,8 +15,8 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
   const offEditMode = () => {
     if (inputValue) {
       props.changeTitle(inputValue)
-      setIsEditMode(false)
     } 
+    setIsEditMode(false)
   }
 
   const onChangeInputValueHandler = (e: ChangeEvent<HTMLInputElement>) => setInputValue(e.currentTarget.value);
