@@ -8,6 +8,7 @@ import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TasksSt
 import { useSelector } from 'react-redux';
 import { AppRootStateType } from './store/store';
 import { useDispatch } from 'react-redux';
+import TodoListWithRedux from './TodoListWithRedux';
 
 export function AppWithRedux() {
   const tasks = useSelector<AppRootStateType, TasksStateType>(store => store.tasks)
@@ -36,29 +37,29 @@ export function AppWithRedux() {
   const removeTodoList = (todoListID: string) => dispatch(removeTodoListAC(todoListID));
 
   const todolistRender = todoLists.map(tl => {
-    let filteredTasks: TaskType[] = tasks[tl.id];
-    if (tl.filter === 'active') {
-      filteredTasks = tasks[tl.id].filter(t => t.isDone === false)
-    }
-    if (tl.filter === 'completed') {
-      filteredTasks = tasks[tl.id].filter(t => t.isDone === true)
-    }
+    // let filteredTasks: TaskType[] = tasks[tl.id];
+    // if (tl.filter === 'active') {
+    //   filteredTasks = tasks[tl.id].filter(t => t.isDone === false)
+    // }
+    // if (tl.filter === 'completed') {
+    //   filteredTasks = tasks[tl.id].filter(t => t.isDone === true)
+    // }
     return (
       <Grid item key={tl.id}>
         <Paper elevation={6} style={{ marginRight: '5px', padding: '5px' }} >
-          <TodoList
+          <TodoListWithRedux todoList={tl} 
 
-            id={tl.id}
-            filter={tl.filter}
-            title={tl.title}
-            tasks={filteredTasks}
-            addTask={addTask}
-            removeTask={removeTask}
-            removeTodoList={removeTodoList}
-            changeTaskTitle={changeTaskTitle}
-            changeTaskStatus={changeTaskStatus}
-            changeTodoListTitle={changeTodoListTitle}
-            changeTodoListFilter={changeTodoListFilter}
+            // id={tl.id}
+            // filter={tl.filter}
+            // title={tl.title}
+            // tasks={filteredTasks}
+            // addTask={addTask}
+            // removeTask={removeTask}
+            // removeTodoList={removeTodoList}
+            // changeTaskTitle={changeTaskTitle}
+            // changeTaskStatus={changeTaskStatus}
+            // changeTodoListTitle={changeTodoListTitle}
+            // changeTodoListFilter={changeTodoListFilter}
           />
         </Paper>
       </Grid>
