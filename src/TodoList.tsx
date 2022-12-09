@@ -1,6 +1,6 @@
 import { HighlightOff } from "@mui/icons-material"
 import { Button, Checkbox, Divider, IconButton, List, ListItem, Stack, Typography } from "@mui/material"
-import { ChangeEvent } from "react"
+import { ChangeEvent, memo, useCallback } from "react"
 import AddItemForm from "./AddItemForm"
 import { EditableSpan } from "./EditableSpan"
 import { TaskType} from "./store/task-reducer"
@@ -21,9 +21,17 @@ type TodoListPropsType = {
   changeTaskTitle: ( taskID: string, todoListID: string, newTitle: string) => void
 }
 
-export const TodoList = (props: TodoListPropsType) => {
+export const TodoList = memo((props: TodoListPropsType) => {
+  console.log('Todolist')
 
-  const tasksList = props.tasks.map(task => {
+  let tasks = props.tasks;
+  if (props.filter === 'active') {
+    tasks = tasks.filter(t => t.isDone === false)
+  }
+  if (props.filter === 'completed') {
+    tasks = tasks.filter(t => t.isDone === true)
+  }
+  const tasksList = tasks.map(task => {
     const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
       props.changeTaskStatus(task.id, props.id, e.currentTarget.checked)
     }
@@ -49,9 +57,11 @@ export const TodoList = (props: TodoListPropsType) => {
   const removeTodoList = () => props.removeTodoList(props.id)
 
   const changeTodoListTitle = (newTitle: string) => props.changeTodoListTitle(newTitle, props.id);
-  const addTask = (title: string) => {
+
+  const addTask = useCallback ((title: string) => {
     props.addTask(title, props.id)
-  }
+  },[props.addTask, props.id])
+
   return (
     <div className='wrapper'>
       <Typography variant={"h5"} align={"center"} >
@@ -83,4 +93,4 @@ export const TodoList = (props: TodoListPropsType) => {
       </div>
     </div>
   );
-}
+})

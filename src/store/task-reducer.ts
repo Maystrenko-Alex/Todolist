@@ -1,5 +1,5 @@
 import { v1 } from 'uuid';
-import { AddTodoListAT, ADD_TODOLIST, REMOVE_TODOLIST, RemoveTodoListAT, todoListID_1, todoListID_2 } from './todolists-reducer';
+import { AddTodoListAT, ADD_TODOLIST, REMOVE_TODOLIST, RemoveTodoListAT } from './todolists-reducer';
 
 export const REMOVE_TASK = 'REMOVE-TASK';
 export const ADD_TASK = 'ADD-TASK';
@@ -41,20 +41,20 @@ export type TasksStateType = {
 
 
 const initialState: TasksStateType = {
-  [todoListID_1]: [
-    { id: v1(), title: 'HTML&CSS', isDone: true },
-    { id: v1(), title: 'JS', isDone: true },
-    { id: v1(), title: 'React', isDone: false },
-    { id: v1(), title: 'Redux', isDone: false },
-    { id: v1(), title: 'RTK', isDone: false }
-  ],
-  [todoListID_2]: [
-    { id: v1(), title: 'Water', isDone: true },
-    { id: v1(), title: 'Beer', isDone: true },
-    { id: v1(), title: 'Milk', isDone: false },
-    { id: v1(), title: 'Sausage', isDone: false },
-    { id: v1(), title: 'Buckwheat', isDone: false }
-  ]
+  // [todoListID_1]: [
+  //   { id: v1(), title: 'HTML&CSS', isDone: true },
+  //   { id: v1(), title: 'JS', isDone: true },
+  //   { id: v1(), title: 'React', isDone: false },
+  //   { id: v1(), title: 'Redux', isDone: false },
+  //   { id: v1(), title: 'RTK', isDone: false }
+  // ],
+  // [todoListID_2]: [
+  //   { id: v1(), title: 'Water', isDone: true },
+  //   { id: v1(), title: 'Beer', isDone: true },
+  //   { id: v1(), title: 'Milk', isDone: false },
+  //   { id: v1(), title: 'Sausage', isDone: false },
+  //   { id: v1(), title: 'Buckwheat', isDone: false }
+  // ]
 }
 export const taskReducer = (state: TasksStateType = initialState, action: TaskActionType): TasksStateType => {
   switch (action.type) {

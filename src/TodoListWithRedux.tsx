@@ -1,10 +1,9 @@
 import { HighlightOff } from '@mui/icons-material';
 import { Button, Checkbox, Divider, IconButton, List, ListItem, Stack, Typography } from '@mui/material';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import AddItemForm from './AddItemForm';
-import { TasksStateType } from './AppWithUseReducer';
 import { EditableSpan } from './EditableSpan';
 import { AppRootStateType } from './store/store';
 import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TaskType } from './store/task-reducer';
@@ -52,9 +51,9 @@ const TodoListWithRedux: React.FC<TodoListWithReduxPropsType> = ({todoList}) => 
   const removeTodoList = () => dispatch(removeTodoListAC(id))
 
   const changeTodoListTitle = (newTitle: string) => dispatch(changeTodoListTitleAC(newTitle, id));
-  const addTask = (title: string) => {
+  const addTask = useCallback((title: string) => {
     dispatch(addTaskAC(title, id))
-  }
+  }, [ dispatch])
   return (
     <div className='wrapper'>
       <Typography variant={"h5"} align={"center"} >
