@@ -2,12 +2,16 @@
   padding: 10px;
   /* display: flex; */
 }
+.menu {
+  margin-bottom: 10px;
+}
 .todoWrapper {
   display: flex;
   flex-wrap: nowrap;
 }
 .wrapper {
   margin: 30px;
+  flex-direction: column;
 }
 .wrapper h5 {
   padding-bottom: 15px;
@@ -49,8 +53,12 @@
 }
 .addFormWrapper{
  height: 75px;
+
 }
 .inputAndButtonBlock {
   display: flex;
   align-items: center;
+}
+.listItems li{
+  justify-content: space-between;
 }

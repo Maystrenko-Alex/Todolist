@@ -66,7 +66,7 @@ export function AppWithRedux() {
 
   return (
     <div className="App">
-      <AppBar position="static">
+      <AppBar position="static" className={'menu'}>
         <Toolbar>
           <IconButton
             size="large"
@@ -84,7 +84,7 @@ export function AppWithRedux() {
         </Toolbar>
       </AppBar>
 
-      <AddItemForm addItem={addTodolist} />
+      <AddItemForm addItem={addTodolist} placeholder={'Enter todolist title....'}/>
       <Grid container xs={12} item spacing={6} style={{ display: 'flex', justifyContent: 'center' }}>
         {todolistRender}
       </Grid>

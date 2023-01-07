@@ -86,7 +86,7 @@ export const TodoList = memo(({
         <Button onClick={removeTodoListHandler}><HighlightOff color="error" /></Button>
       </Typography>
       <AddItemForm addItem={addTaskHandler} />
-      <List>
+      <List className={'listItems'}>
         {tasks.length ? tasksList : <span>Your taskslist is empty...</span>}
       </List>
       <div className={'btnBlock'}>

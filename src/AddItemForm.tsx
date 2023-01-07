@@ -4,6 +4,7 @@ import React, { KeyboardEvent, ChangeEvent, useState, memo } from 'react';
 import { v1 } from 'uuid';
 
 type AddItemFormPropsType = {
+  placeholder?: string
   addItem: (title: string, todoListID: string) => void
 }
 
@@ -34,9 +35,9 @@ export const AddItemForm = memo((props: AddItemFormPropsType) => {
       <div className='inputAndButtonBlock'>
         <TextField
           size='small'
-          className={error ? 'error' : 'notError'}
+          error={error}
           autoFocus
-          placeholder='Title'
+          label={error ? 'Title is required!' : (props.placeholder || 'title')}
           value={title}
           onChange={onChangeValueInputHandler}
           onKeyPress={onKeyPressAddItem}
@@ -48,7 +49,7 @@ export const AddItemForm = memo((props: AddItemFormPropsType) => {
           <PostAdd fontSize='large' />
         </Button>
       </div>
-      {error && <div className={'errorMessage'}>Title is required!</div>}
+      {/* {error && <div className={'errorMessage'}>Title is required!</div>} */}
     </div>
   );
 }

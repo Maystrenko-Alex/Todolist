@@ -1,5 +1,5 @@
 
-import { combineReducers, compose, legacy_createStore, createStore} from "redux";
+import { combineReducers, compose, legacy_createStore} from "redux";
 import { taskReducer, TasksStateType } from "./task-reducer";
 import { todolistsReducer, TodoListType } from "./todolists-reducer";
 

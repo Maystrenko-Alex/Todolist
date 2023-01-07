@@ -26,7 +26,6 @@ export const Task = memo(({ task, removeTask, changeTaskStatus, changeTaskTitle 
     <ListItem key={task.id}
         style={{
           padding: '0px',
-          justifyContent: 'space-between',
           textDecoration: task.isDone ? 'line-through' : 'none'
         }}
         className={task.isDone ? 'isDone' : ''}
