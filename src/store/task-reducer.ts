@@ -57,6 +57,7 @@ const initialState: TasksStateType = {
   // ]
 }
 export const taskReducer = (state: TasksStateType = initialState, action: TaskActionType): TasksStateType => {
+  debugger
   switch (action.type) {
     case REMOVE_TASK:
       return { ...state, [action.todoListID]: state[action.todoListID].filter(t => t.id !== action.taskID) };
@@ -65,6 +66,7 @@ export const taskReducer = (state: TasksStateType = initialState, action: TaskAc
        case CHANGE_TASK_TITLE:
       return {...state, [action.todoListID]: state[action.todoListID].map(t => t.id === action.taskID ? {...t, title: action.newTitle} : t)}
     case CHANGE_TASK_STATUS:
+      debugger
       return {...state, [action.todoListID]: state[action.todoListID].map(t => t.id === action.taskID 
         ? {...t, isDone: action.newStatus} 
         : t) 

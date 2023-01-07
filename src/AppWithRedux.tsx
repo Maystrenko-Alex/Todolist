@@ -27,6 +27,7 @@ export function AppWithRedux() {
   }, [dispatch])
 
   const changeTaskStatus = useCallback((taskID: string, todoListID: string, newStatus: boolean) => {
+    debugger
     dispatch(changeTaskStatusAC(taskID, todoListID, newStatus))
   }, [dispatch])
 

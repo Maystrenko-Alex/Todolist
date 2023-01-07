@@ -47,7 +47,11 @@ export const TodoList = memo(({
   }
 
   const removeTaskCallback = useCallback((taskID: string) => removeTask(taskID, id), [removeTask, id])
-  const changeTaskStatusCallback = useCallback((taskID: string, newStatus: boolean) => changeTaskStatus(taskID, id, newStatus), [changeTaskStatus, id])
+  const changeTaskStatusCallback = useCallback((taskID: string, newStatus: boolean) => {
+    debugger
+    changeTaskStatus(taskID, id, newStatus)
+  }, [changeTaskStatus, id])
+  
   const changeTaskTitleCallback = useCallback((taskID: string, newTitle: string) => changeTaskTitle(taskID, id, newTitle), [changeTaskTitle, id])
 
   const tasksList = tasksForRender.map(task => {

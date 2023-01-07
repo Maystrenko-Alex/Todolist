@@ -12,10 +12,13 @@ export type TaskPropsType = {
 }
 
 export const Task = memo(({ task, removeTask, changeTaskStatus, changeTaskTitle } : TaskPropsType) => {
-  
+  debugger
   console.log('task')
   
-  const onChangeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => changeTaskStatus(task.id, e.currentTarget.checked)
+  const onChangeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    debugger
+    changeTaskStatus(task.id, e.currentTarget.checked)
+  }
   const onChangeTaskTitle = (newTitle: string) => changeTaskTitle(task.id, newTitle);
   const onClickHandler = () => removeTask(task.id);
 
